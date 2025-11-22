@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es-AR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RCV ESTUDIO CREATIVO | Foto & Video</title>
+    <meta name="description" content="RCV Estudio Creativo. Fotografía y video para Casamientos, 15 Años y Eventos. Servicio en Argentina y Cobertura Mundial.">
+    
+    <!-- Google Fonts: Inter para un look limpio y moderno -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configuración personalizada de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'rcv-black': '#050505',
+                        'rcv-dark': '#0f0f0f',
+                        'rcv-card': '#121212',
+                        'rcv-input': '#1a1a1a',
+                        'rcv-gray': '#1f1f1f',
+                        'rcv-accent': '#3b82f6',
+                        'rcv-purple': '#6366f1',
+                        'rcv-purple-dark': '#4f46e5',
+                        'rcv-green': '#22c55e',
+                        'rcv-red': '#ef4444',
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar Dark */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #444444;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #666666;
+        }
+
+        /* Utilitarios de animación */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efecto de imagen hover */
+        .image-hover-zoom {
+            overflow: hidden;
+        }
+        .image-hover-zoom img {
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .image-hover-zoom:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Gradiente sutil para el logo RGB */
+        .rgb-gradient-text {
+            background: linear-gradient(to right, #22c55e, #3b82f6, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Utilidad para ocultar con transición */
+        .view-section {
+            display: block;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        .view-section.hidden {
+            display: none;
+            opacity: 0;
+        }
+
+        /* Estilos específicos para inputs del formulario */
+        .form-input {
+            width: 100%;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 12px 16px;
+            color: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-input:focus {
+            border-color: #6366f1;
+        }
+        /* Icono de calendario oscuro */
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: 0.5;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-rcv-black text-white antialiased font-sans selection:bg-rcv-purple selection:text-white flex flex-col min-h-screen">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 bg-rcv-black/90 backdrop-blur-md border-b border-rcv-gray transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo: Ahora lleva al inicio real (top) -->
+                <a href="#" onclick="navigateTo('home')" class="text-2xl font-black tracking-tighter uppercase z-50 relative flex items-center gap-2 cursor-pointer">
+                    <div class="w-8 h-8 relative">
+                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white w-full h-full">
+                            <path d="M12 2L2 22h20L12 2z" stroke="url(#gradient)" stroke-width="3"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#22c55e" />
+                                    <stop offset="50%" stop-color="#3b82f6" />
+                                    <stop offset="100%" stop-color="#ef4444" />
+                                </linearGradient>
+                            </defs>
+                         </svg>
+                    </div>
+                    <span>RCV<span class="font-light text-gray-400">Estudio</span></span>
+                </a>
+
+                <!-- Desktop Menu: Actualizado para usar navigateTo -->
+                <div class="hidden md:flex space-x-12 text-sm font-medium tracking-wide uppercase text-gray-300">
+                    <button onclick="navigateTo('home')" class="hover:text-white transition-colors focus:outline-none">Inicio</button>
+                    <button onclick="navigateTo('experiencias')" class="hover:text-white transition-colors focus:outline-none">Portfolio</button>
+                    <button onclick="navigateTo('servicios')" class="hover:text-white transition-colors focus:outline-none">Servicios</button>
+                    <button onclick="navigateTo('contacto')" class="bg-white text-black px-6 py-2 hover:bg-gray-200 transition-colors font-bold rounded-sm focus:outline-none">Hablemos</button>
+                </div>
+
+                <!-- Mobile Menu Button (Visible solo en móvil) -->
+                <button id="menu-btn" onclick="toggleMenu()" class="md:hidden z-50 p-2 text-white hover:bg-white/10 rounded-md transition-colors focus:outline-none">
+                    <i data-lucide="menu" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-rcv-black z-[60] flex flex-col translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+            
+            <!-- Header del Menú -->
+            <div class="flex justify-between items-center px-6 h-20 border-b border-gray-800 bg-rcv-dark">
+                <span class="text-xl font-black tracking-tighter uppercase text-white flex items-center gap-2">
+                    <i data-lucide="aperture" class="w-6 h-6 text-rcv-accent"></i> RCV<span class="font-light text-gray-400">MENU</span>
+                </span>
+                <button onclick="toggleMenu()" class="text-white p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Links (Centrados) - Actualizados con navigateTo -->
+            <div class="flex-1 flex flex-col justify-center items-center space-y-8 bg-rcv-black">
+                <button onclick="navigateTo('home'); toggleMenu()" class="text-3xl font-black uppercase text-white hover:text-rcv-purple transition-colors tracking-tighter">Inicio</button>
+                <button onclick="navigateTo('experiencias'); toggleMenu()" class="text-3xl font-black uppercase text-white hover:text-rcv-purple transition-colors tracking-tighter">Portfolio</button>
+                <button onclick="navigateTo('servicios'); toggleMenu()" class="text-3xl font-black uppercase text-white hover:text-rcv-purple transition-colors tracking-tighter">Servicios</button>
+                <button onclick="navigateTo('contacto'); toggleMenu()" class="text-3xl font-black uppercase text-rcv-purple underline decoration-4 underline-offset-8 tracking-tighter">Contacto</button>
+            </div>
+            
+            <!-- Footer del Menú -->
+            <div class="p-8 pb-12 bg-rcv-dark border-t border-gray-800 flex flex-col items-center">
+                <p class="text-gray-500 text-sm mb-4 font-medium uppercase tracking-widest">Seguinos</p>
+                <div class="flex gap-8">
+                    <a href="https://instagram.com/rcvestudiocreativo" target="_blank" class="text-white hover:text-rcv-accent transition-colors"><i data-lucide="instagram" class="w-8 h-8"></i></a>
+                    <a href="#" class="text-white hover:text-rcv-accent transition-colors"><i data-lucide="facebook" class="w-8 h-8"></i></a>
+                    <a href="#" class="text-white hover:text-rcv-accent transition-colors"><i data-lucide="youtube" class="w-8 h-8"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BOTONES FLOTANTES (NUEVO) -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-4">
+        <!-- Instagram -->
+        <a href="https://instagram.com/rcvestudiocreativo" target="_blank" class="group relative w-14 h-14 bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform duration-300">
+            <i data-lucide="instagram" class="w-7 h-7"></i>
+            <!-- Tooltip -->
+            <span class="absolute right-16 px-3 py-1 bg-white text-black text-xs font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md">
+                Seguinos en IG
+            </span>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/5491140761588" target="_blank" class="group relative w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform duration-300 animate-bounce-slow">
+            <i data-lucide="message-circle" class="w-7 h-7 fill-current"></i>
+             <!-- Tooltip -->
+             <span class="absolute right-16 px-3 py-1 bg-white text-black text-xs font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md">
+                Escribinos al WP
+            </span>
+        </a>
+    </div>
+
+    <!-- ======================= HOME VIEW ======================= -->
+    <div id="home-view" class="view-section">
+        
+        <!-- Hero Section -->
+        <header class="relative h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                 <img src="https://images.unsplash.com/photo-1511285560982-1351c4f6170b?q=80&w=2670&auto=format&fit=crop" 
+                      alt="Bodas y Eventos Fondo" 
+                      class="w-full h-full object-cover opacity-60">
+                 <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-rcv-black"></div>
+            </div>
+
+            <div class="relative z-10 container mx-auto px-6 text-center text-white">
+                <div class="inline-flex items-center gap-2 border border-white/20 bg-white/5 px-4 py-2 rounded-full mb-6 backdrop-blur-md fade-in-up">
+                    <i data-lucide="plane" class="w-4 h-4 text-rcv-accent"></i>
+                    <span class="text-xs font-bold tracking-widest uppercase">Argentina — Worldwide Service</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl lg:text-9xl font-black tracking-tighter leading-none mb-6 fade-in-up delay-100">
+                    CAPTURANDO<br>
+                    <span class="rgb-gradient-text">MOMENTOS</span>
+                </h1>
+                <p class="text-lg md:text-xl font-light text-gray-300 max-w-2xl mx-auto mb-10 fade-in-up delay-200">
+                    Photo & Video Studio especializado en Bodas, 15 Años y Organización integral de eventos. Creamos recuerdos cinematográficos.
+                </p>
+                <div class="fade-in-up delay-300 flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#experiencias" class="inline-block bg-white text-black px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-gray-200 transition-all duration-300 rounded-sm">
+                        Ver Galería
+                    </a>
+                    <a href="#contacto" class="inline-block border border-white text-white px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-white/10 transition-all duration-300 rounded-sm">
+                        Reservar Fecha
+                    </a>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <i data-lucide="chevron-down" class="text-white w-6 h-6"></i>
+            </div>
+        </header>
+
+        <!-- Intro Text -->
+        <section class="py-24 md:py-32 bg-rcv-black">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-2xl md:text-4xl font-medium leading-tight mb-8 text-white">
+                    "No solo capturamos imágenes, diseñamos experiencias visuales para los momentos más importantes de tu vida."
+                </h2>
+                <div class="flex justify-center gap-2">
+                    <div class="w-16 h-1 bg-green-500 rounded-full"></div>
+                    <div class="w-16 h-1 bg-blue-500 rounded-full"></div>
+                    <div class="w-16 h-1 bg-red-500 rounded-full"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicios Section (Experiencias) -->
+        <section id="experiencias" class="bg-rcv-dark py-24">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                    <div>
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-rcv-accent mb-2">Nuestro Foco</h3>
+                        <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">EXPERIENCIAS RCV</h2>
+                    </div>
+                    <p class="text-gray-400 max-w-md mt-4 md:mt-0 text-sm">
+                        Explorá nuestras categorías principales.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Card 1: Bodas (CLICKABLE) -->
+                    <div class="group cursor-pointer" onclick="openGallery('bodas')">
+                        <div class="image-hover-zoom aspect-[4/3] bg-gray-800 relative mb-4 overflow-hidden rounded-lg border border-gray-800">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2670&auto=format&fit=crop" alt="Bodas Wedding" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all"></div>
+                            <div class="absolute top-4 right-4 bg-white/90 text-black px-3 py-1 text-xs font-bold uppercase backdrop-blur-sm rounded-sm">Ver Galería</div>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-700 pb-4 group-hover:border-white transition-colors">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-1 text-white">Casamientos & Love Stories</h3>
+                                <p class="text-gray-500 text-sm">Cobertura documental y artística de tu gran día.</p>
+                            </div>
+                            <span class="text-2xl text-white group-hover:translate-x-2 transition-transform">→</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: XVs (CLICKABLE) -->
+                    <div class="group cursor-pointer md:mt-24" onclick="openGallery('xvs')">
+                        <div class="image-hover-zoom aspect-[4/3] bg-gray-800 relative mb-4 overflow-hidden rounded-lg border border-gray-800">
+                            <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2670&auto=format&fit=crop" alt="XVs Quinceaños" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all"></div>
+                            <div class="absolute top-4 right-4 bg-white/90 text-black px-3 py-1 text-xs font-bold uppercase backdrop-blur-sm rounded-sm">Ver Galería</div>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-700 pb-4 group-hover:border-white transition-colors">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-1 text-white">15 Años & Books</h3>
+                                <p class="text-gray-500 text-sm">Producciones de moda, cambios de look y exteriores.</p>
+                            </div>
+                            <span class="text-2xl text-white group-hover:translate-x-2 transition-transform">→</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Tech & Eventos (AHORA CLICKABLE) -->
+                    <div class="group cursor-pointer" onclick="openGallery('tech')">
+                        <div class="image-hover-zoom aspect-[4/3] bg-gray-800 relative mb-4 overflow-hidden rounded-lg border border-gray-800">
+                            <img src="https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?q=80&w=2670&auto=format&fit=crop" alt="Fiesta Tech" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all"></div>
+                            <div class="absolute top-4 right-4 bg-white/90 text-black px-3 py-1 text-xs font-bold uppercase backdrop-blur-sm rounded-sm">Ver Galería</div>
+                        </div>
+                        <div class="flex justify-between items-start border-b border-gray-700 pb-4 group-hover:border-white transition-colors">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-1 text-white">360° & VideoFlip</h3>
+                                <p class="text-gray-500 text-sm">Tecnología inmersiva para tus invitados en tiempo real.</p>
+                            </div>
+                            <span class="text-2xl text-white group-hover:translate-x-2 transition-transform">→</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cobertura -->
+        <section id="servicios" class="py-24 bg-rcv-black text-white relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-rcv-gray/20 to-transparent pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-4">
+                        <h2 class="text-5xl font-black mb-6 tracking-tight">COBERTURA<br><span class="text-gray-600">PREMIUM.</span></h2>
+                        <p class="text-gray-400 mb-8">
+                            No dejamos nada al azar. Nuestro equipo utiliza la última tecnología para garantizar resultados de cine.
+                        </p>
+                    </div>
+                    
+                    <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
+                        <div class="border-t border-gray-800 pt-4">
+                            <h4 class="font-bold text-lg mb-2 flex items-center gap-2"><i data-lucide="video" class="w-5 h-5 text-rcv-accent"></i> Video estilo Cine</h4>
+                            <ul class="text-gray-400 text-sm space-y-1">
+                                <li>Grabación en 4K UHD</li>
+                                <li>Estabilización con Gimbal</li>
+                            </ul>
+                        </div>
+                        <div class="border-t border-gray-800 pt-4">
+                            <h4 class="font-bold text-lg mb-2 flex items-center gap-2"><i data-lucide="camera" class="w-5 h-5 text-rcv-green"></i> Fotografía</h4>
+                            <ul class="text-gray-400 text-sm space-y-1">
+                                <li>Cobertura completa del evento</li>
+                                <li>Fotolibros de lujo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Worldwide Banner -->
+        <section id="worldwide" class="py-20 bg-white text-black overflow-hidden relative">
+            <div class="container mx-auto px-6 relative z-10 text-center">
+                <h2 class="text-3xl md:text-5xl font-black mb-8 tracking-tighter">ARGENTINA & EL MUNDO</h2>
+                <div class="flex justify-center gap-8 text-gray-400">
+                    <i data-lucide="map-pin" class="w-8 h-8"></i>
+                    <i data-lucide="plane" class="w-8 h-8"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto (REDITADO) -->
+        <section id="contacto" class="py-24 bg-rcv-dark border-t border-gray-900 flex justify-center">
+            <div class="max-w-6xl w-full mx-6 bg-rcv-card rounded-3xl overflow-hidden shadow-2xl border border-gray-800">
+                <div class="grid grid-cols-1 lg:grid-cols-5 h-full">
+                    
+                    <!-- Columna Izquierda: Info -->
+                    <div class="lg:col-span-2 p-10 bg-black/50 flex flex-col justify-between relative">
+                        <div>
+                            <h2 class="text-4xl font-black mb-4 flex items-center gap-2">
+                                ¡Hablemos! <span class="text-3xl">👇</span>
+                            </h2>
+                            <p class="text-gray-400 mb-12 leading-relaxed">
+                                Contanos sobre tu evento. Las fechas se reservan con anticipación.
+                            </p>
+
+                            <div class="space-y-8">
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mr-4 shrink-0">
+                                        <i data-lucide="map-pin" class="w-5 h-5 text-blue-500"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white text-sm">Ubicación</h4>
+                                        <p class="text-gray-400 text-sm">Buenos Aires, ARG<br>Disponible mundialmente ✈️</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mr-4 shrink-0">
+                                        <i data-lucide="instagram" class="w-5 h-5 text-blue-500"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white text-sm">Instagram</h4>
+                                        <a href="https://instagram.com/rcvestudiocreativo" target="_blank" class="text-gray-400 text-sm hover:text-white">@rcvestudiocreativo</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center mr-4 shrink-0">
+                                        <i data-lucide="phone" class="w-5 h-5 text-blue-500"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white text-sm">WhatsApp</h4>
+                                        <p class="text-gray-400 text-sm">011 4076-1588</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones sociales pequeños abajo -->
+                        <div class="flex gap-4 mt-12">
+                            <a href="https://instagram.com/rcvestudiocreativo" target="_blank" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                                <i data-lucide="instagram" class="w-5 h-5 text-gray-300"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                                <i data-lucide="video" class="w-5 h-5 text-gray-300"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Formulario -->
+                    <div class="lg:col-span-3 p-10 bg-rcv-card">
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wide mb-2 text-gray-500">Nombre</label>
+                                    <input type="text" id="nombre" class="form-input" placeholder="Tu nombre" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wide mb-2 text-gray-500">Fecha</label>
+                                    <input type="date" id="fecha" class="form-input" required>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wide mb-2 text-gray-500">Tipo de Evento</label>
+                                <div class="relative">
+                                    <select id="tipoEvento" class="form-input appearance-none cursor-pointer" required>
+                                        <option value="Boda">Casamiento</option>
+                                        <option value="XV">15 Años (XV)</option>
+                                        <option value="Corporativo">Evento Corporativo</option>
+                                        <option value="Book">Book de Fotos</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                                        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wide mb-2 text-gray-500">Mensaje</label>
+                                <textarea id="mensaje" class="form-input h-32 resize-none" placeholder="Contanos qué estás buscando..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-rcv-purple text-white py-4 rounded-md font-bold uppercase tracking-widest hover:opacity-90 transition-opacity shadow-lg shadow-purple-900/20">
+                                Enviar Consulta
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ======================= GALERÍA BODAS VIEW ======================= -->
+    <div id="bodas-view" class="view-section hidden pt-24 min-h-screen bg-rcv-black animate-fade-in-up">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Header Galería -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 border-b border-gray-800 pb-8">
+                <div>
+                    <h4 class="text-rcv-accent font-bold uppercase tracking-widest text-sm mb-2">Portfolio</h4>
+                    <h1 class="text-4xl md:text-6xl font-black text-white">CASAMIENTOS</h1>
+                </div>
+                <button onclick="showHome()" class="mt-4 md:mt-0 flex items-center gap-2 text-white hover:text-rcv-accent transition-colors border border-white/20 px-6 py-2 rounded-full">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver
+                </button>
+            </div>
+
+            <!-- Grid de Fotos Masonry-Style -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 pb-24">
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1511285560982-1351c4f6170b?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================= GALERÍA XVS VIEW ======================= -->
+    <div id="xvs-view" class="view-section hidden pt-24 min-h-screen bg-rcv-black animate-fade-in-up">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Header Galería -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 border-b border-gray-800 pb-8">
+                <div>
+                    <h4 class="text-rcv-green font-bold uppercase tracking-widest text-sm mb-2">Portfolio</h4>
+                    <h1 class="text-4xl md:text-6xl font-black text-white">15 AÑOS & BOOKS</h1>
+                </div>
+                <button onclick="showHome()" class="mt-4 md:mt-0 flex items-center gap-2 text-white hover:text-rcv-green transition-colors border border-white/20 px-6 py-2 rounded-full">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver
+                </button>
+            </div>
+
+            <!-- Grid de Fotos -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 pb-24">
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2620&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=2574&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1503342394128-c104d54dba01?q=80&w=2574&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2564&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================= GALERÍA TECH VIEW (NUEVA) ======================= -->
+    <div id="tech-view" class="view-section hidden pt-24 min-h-screen bg-rcv-black animate-fade-in-up">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Header Galería -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 border-b border-gray-800 pb-8">
+                <div>
+                    <h4 class="text-rcv-red font-bold uppercase tracking-widest text-sm mb-2">Entretenimiento</h4>
+                    <h1 class="text-4xl md:text-6xl font-black text-white">360° & VIDEOFLIP</h1>
+                </div>
+                <button onclick="showHome()" class="mt-4 md:mt-0 flex items-center gap-2 text-white hover:text-rcv-red transition-colors border border-white/20 px-6 py-2 rounded-full">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver
+                </button>
+            </div>
+
+            <!-- Grid de Fotos Tech/Fiesta -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 pb-24">
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1514525253440-b393452e2729?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+                <div class="break-inside-avoid">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (Persistente) -->
+    <footer class="bg-black text-white py-12 border-t border-gray-900 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
+            <p>&copy; 2024 RCV Estudio Creativo. Todos los derechos reservados.</p>
+            <div class="mt-4 md:mt-0 flex gap-4">
+                <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                <a href="#" class="hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg', 'bg-opacity-95');
+            } else {
+                navbar.classList.remove('shadow-lg', 'bg-opacity-95');
+            }
+        });
+
+        // ================= SPA LOGIC (Single Page App Simulation) =================
+        const homeView = document.getElementById('home-view');
+        const bodasView = document.getElementById('bodas-view');
+        const xvsView = document.getElementById('xvs-view');
+        const techView = document.getElementById('tech-view');
+        
+        // Variable para guardar la posición del scroll
+        let lastScrollPosition = 0;
+
+        function openGallery(type) {
+            // 1. Guardar la posición actual del scroll antes de cambiar de vista
+            lastScrollPosition = window.scrollY;
+
+            // 2. Ocultar Home
+            homeView.classList.add('hidden');
+            
+            // 3. Ocultar otras galerías por seguridad
+            bodasView.classList.add('hidden');
+            xvsView.classList.add('hidden');
+            techView.classList.add('hidden');
+
+            // 4. Mostrar la deseada y hacer scroll al top (para ver la galería desde arriba)
+            if (type === 'bodas') {
+                bodasView.classList.remove('hidden');
+            } else if (type === 'xvs') {
+                xvsView.classList.remove('hidden');
+            } else if (type === 'tech') {
+                techView.classList.remove('hidden');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        // Función SOLO para el botón "Volver" (restaura posición anterior)
+        function showHome() {
+            // 1. Ocultar galerías
+            bodasView.classList.add('hidden');
+            xvsView.classList.add('hidden');
+            techView.classList.add('hidden');
+
+            // 2. Mostrar Home
+            homeView.classList.remove('hidden');
+            
+            // 3. Restaurar la posición del scroll original
+            setTimeout(() => {
+                window.scrollTo(0, lastScrollPosition);
+            }, 0);
+        }
+
+        // Función NUEVA para el Menú (Navegación directa)
+        function navigateTo(sectionId) {
+            // 1. Asegurar que estamos en Home (ocultar galerías)
+            bodasView.classList.add('hidden');
+            xvsView.classList.add('hidden');
+            techView.classList.add('hidden');
+            homeView.classList.remove('hidden');
+
+            // 2. Scroll a la sección
+            if (sectionId === 'home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                // Pequeño timeout para asegurar que el DOM se renderizó si veníamos de una galería oculta
+                setTimeout(() => {
+                    const element = document.getElementById(sectionId);
+                    if (element) {
+                        const headerOffset = 80; // Altura aproximada del navbar
+                        const elementPosition = element.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                }, 10);
+            }
+        }
+
+        // Mobile Menu Logic (Actualizado)
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                // Abrir: Quitamos la traslación para que entre en pantalla
+                mobileMenu.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden'; // Evitar scroll de fondo
+            } else {
+                // Cerrar: Volvemos a moverlo fuera de pantalla
+                mobileMenu.classList.add('translate-x-full');
+                document.body.style.overflow = 'auto'; // Permitir scroll
+            }
+            lucide.createIcons();
+        }
+
+        // WhatsApp Logic
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const fecha = document.getElementById('fecha').value;
+            const tipoEvento = document.getElementById('tipoEvento').value;
+            const mensaje = document.getElementById('mensaje').value;
+
+            // Formatear mensaje para WhatsApp
+            const text = `Hola RCV! 👋%0A%0AQuiero consultar por un evento:%0A%0A👤 *Nombre:* ${nombre}%0A📅 *Fecha:* ${fecha}%0A🎉 *Evento:* ${tipoEvento}%0A💬 *Mensaje:* ${mensaje}`;
+            
+            // Número de teléfono (Reemplazar con el real)
+            const phone = '5491140761588'; 
+            
+            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+        });
+
+        // Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+    </script>
+</body>
+</html>
