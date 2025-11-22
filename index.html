@@ -42,6 +42,7 @@
                     },
                     animation: {
                         'bounce-slow': 'bounce 3s infinite',
+                        'spin-slow': 'spin 3s linear infinite',
                     }
                 }
             }
@@ -132,7 +133,19 @@
         }
     </style>
 </head>
-<body class="bg-rcv-black text-white antialiased font-sans selection:bg-rcv-purple selection:text-white flex flex-col min-h-screen">
+<body class="bg-rcv-black text-white antialiased font-sans selection:bg-rcv-purple selection:text-white flex flex-col min-h-screen overflow-hidden">
+
+    <!-- PRELOADER (NUEVO) -->
+    <div id="preloader" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center transition-opacity duration-500">
+        <div class="mb-6 text-5xl font-black tracking-tighter text-white flex items-center gap-3">
+             <i data-lucide="aperture" class="w-10 h-10 text-white animate-spin-slow"></i> RCV
+        </div>
+        <!-- Barra de carga -->
+        <div class="w-64 h-1 bg-gray-900 rounded-full overflow-hidden relative">
+            <div id="progress-bar" class="absolute top-0 left-0 h-full bg-gradient-to-r from-rcv-green via-rcv-accent to-rcv-red w-0 transition-all duration-100 ease-out"></div>
+        </div>
+        <div id="progress-text" class="mt-4 text-xs font-bold text-gray-500 font-mono tracking-widest">CARGANDO... 0%</div>
+    </div>
 
     <!-- Navegación -->
     <nav class="fixed w-full z-50 bg-rcv-black/90 backdrop-blur-md border-b border-rcv-gray transition-all duration-300" id="navbar">
@@ -155,7 +168,7 @@
                     <span>RCV<span class="font-light text-gray-400">Estudio</span></span>
                 </a>
 
-                <!-- Desktop Menu: Actualizado para usar navigateTo -->
+                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-12 text-sm font-medium tracking-wide uppercase text-gray-300">
                     <button onclick="navigateTo('home')" class="hover:text-white transition-colors focus:outline-none">Inicio</button>
                     <button onclick="navigateTo('experiencias')" class="hover:text-white transition-colors focus:outline-none">Portfolio</button>
@@ -163,7 +176,7 @@
                     <button onclick="navigateTo('contacto')" class="bg-white text-black px-6 py-2 hover:bg-gray-200 transition-colors font-bold rounded-sm focus:outline-none">Hablemos</button>
                 </div>
 
-                <!-- Mobile Menu Button (Visible solo en móvil) -->
+                <!-- Mobile Menu Button -->
                 <button id="menu-btn" onclick="toggleMenu()" class="md:hidden z-50 p-2 text-white hover:bg-white/10 rounded-md transition-colors focus:outline-none">
                     <i data-lucide="menu" class="w-8 h-8"></i>
                 </button>
@@ -183,7 +196,7 @@
                 </button>
             </div>
 
-            <!-- Links (Centrados) - Actualizados con navigateTo -->
+            <!-- Links (Centrados) -->
             <div class="flex-1 flex flex-col justify-center items-center space-y-8 bg-rcv-black">
                 <button onclick="navigateTo('home'); toggleMenu()" class="text-3xl font-black uppercase text-white hover:text-rcv-purple transition-colors tracking-tighter">Inicio</button>
                 <button onclick="navigateTo('experiencias'); toggleMenu()" class="text-3xl font-black uppercase text-white hover:text-rcv-purple transition-colors tracking-tighter">Portfolio</button>
@@ -203,12 +216,11 @@
         </div>
     </nav>
 
-    <!-- BOTONES FLOTANTES (NUEVO) -->
+    <!-- BOTONES FLOTANTES -->
     <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-4">
         <!-- Instagram -->
         <a href="https://instagram.com/rcvestudiocreativo" target="_blank" class="group relative w-14 h-14 bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform duration-300">
             <i data-lucide="instagram" class="w-7 h-7"></i>
-            <!-- Tooltip -->
             <span class="absolute right-16 px-3 py-1 bg-white text-black text-xs font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md">
                 Seguinos en IG
             </span>
@@ -216,7 +228,6 @@
         <!-- WhatsApp -->
         <a href="https://wa.me/5491140761588" target="_blank" class="group relative w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform duration-300 animate-bounce-slow">
             <i data-lucide="message-circle" class="w-7 h-7 fill-current"></i>
-             <!-- Tooltip -->
              <span class="absolute right-16 px-3 py-1 bg-white text-black text-xs font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md">
                 Escribinos al WP
             </span>
@@ -323,10 +334,11 @@
                         </div>
                     </div>
 
-                    <!-- Card 3: Tech & Eventos (AHORA CLICKABLE) -->
+                    <!-- Card 3: Tech & Eventos (ACTUALIZADA IMAGEN) -->
                     <div class="group cursor-pointer" onclick="openGallery('tech')">
                         <div class="image-hover-zoom aspect-[4/3] bg-gray-800 relative mb-4 overflow-hidden rounded-lg border border-gray-800">
-                            <img src="https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?q=80&w=2670&auto=format&fit=crop" alt="Fiesta Tech" class="w-full h-full object-cover">
+                            <!-- Nueva imagen: Más "Fiesta/Neon" para representar 360 y diversión -->
+                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2670&auto=format&fit=crop" alt="Fiesta Tech" class="w-full h-full object-cover">
                             <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all"></div>
                             <div class="absolute top-4 right-4 bg-white/90 text-black px-3 py-1 text-xs font-bold uppercase backdrop-blur-sm rounded-sm">Ver Galería</div>
                         </div>
@@ -385,7 +397,7 @@
             </div>
         </section>
 
-        <!-- Contacto (REDITADO) -->
+        <!-- Contacto -->
         <section id="contacto" class="py-24 bg-rcv-dark border-t border-gray-900 flex justify-center">
             <div class="max-w-6xl w-full mx-6 bg-rcv-card rounded-3xl overflow-hidden shadow-2xl border border-gray-800">
                 <div class="grid grid-cols-1 lg:grid-cols-5 h-full">
@@ -487,7 +499,7 @@
         </section>
     </div>
 
-    <!-- ======================= GALERÍA BODAS VIEW ======================= -->
+    <!-- ======================= GALERÍAS ======================= -->
     <div id="bodas-view" class="view-section hidden pt-24 min-h-screen bg-rcv-black animate-fade-in-up">
         <div class="max-w-7xl mx-auto px-6">
             <!-- Header Galería -->
@@ -500,7 +512,6 @@
                     <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver
                 </button>
             </div>
-
             <!-- Grid de Fotos Masonry-Style -->
             <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 pb-24">
                 <div class="break-inside-avoid">
@@ -512,23 +523,12 @@
                 <div class="break-inside-avoid">
                     <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
                 </div>
-                <div class="break-inside-avoid">
-                    <img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
-                </div>
-                <div class="break-inside-avoid">
-                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
-                </div>
-                <div class="break-inside-avoid">
-                    <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- ======================= GALERÍA XVS VIEW ======================= -->
     <div id="xvs-view" class="view-section hidden pt-24 min-h-screen bg-rcv-black animate-fade-in-up">
         <div class="max-w-7xl mx-auto px-6">
-            <!-- Header Galería -->
             <div class="flex flex-col md:flex-row justify-between items-center mb-12 border-b border-gray-800 pb-8">
                 <div>
                     <h4 class="text-rcv-green font-bold uppercase tracking-widest text-sm mb-2">Portfolio</h4>
@@ -538,8 +538,6 @@
                     <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver
                 </button>
             </div>
-
-            <!-- Grid de Fotos -->
             <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 pb-24">
                 <div class="break-inside-avoid">
                     <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
@@ -547,23 +545,12 @@
                 <div class="break-inside-avoid">
                     <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2620&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
                 </div>
-                <div class="break-inside-avoid">
-                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=2574&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
-                </div>
-                <div class="break-inside-avoid">
-                    <img src="https://images.unsplash.com/photo-1503342394128-c104d54dba01?q=80&w=2574&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
-                </div>
-                <div class="break-inside-avoid">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2564&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- ======================= GALERÍA TECH VIEW (NUEVA) ======================= -->
     <div id="tech-view" class="view-section hidden pt-24 min-h-screen bg-rcv-black animate-fade-in-up">
         <div class="max-w-7xl mx-auto px-6">
-            <!-- Header Galería -->
             <div class="flex flex-col md:flex-row justify-between items-center mb-12 border-b border-gray-800 pb-8">
                 <div>
                     <h4 class="text-rcv-red font-bold uppercase tracking-widest text-sm mb-2">Entretenimiento</h4>
@@ -573,26 +560,12 @@
                     <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver
                 </button>
             </div>
-
-            <!-- Grid de Fotos Tech/Fiesta -->
             <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 pb-24">
                 <div class="break-inside-avoid">
                     <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
                 </div>
                 <div class="break-inside-avoid">
                     <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
-                </div>
-                <div class="break-inside-avoid">
-                    <img src="https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
-                </div>
-                <div class="break-inside-avoid">
-                    <img src="https://images.unsplash.com/photo-1514525253440-b393452e2729?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
-                </div>
-                <div class="break-inside-avoid">
-                    <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
-                </div>
-                <div class="break-inside-avoid">
-                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2670&auto=format&fit=crop" class="w-full rounded-lg hover:opacity-80 transition-opacity">
                 </div>
             </div>
         </div>
@@ -629,22 +602,15 @@
         const xvsView = document.getElementById('xvs-view');
         const techView = document.getElementById('tech-view');
         
-        // Variable para guardar la posición del scroll
         let lastScrollPosition = 0;
 
         function openGallery(type) {
-            // 1. Guardar la posición actual del scroll antes de cambiar de vista
             lastScrollPosition = window.scrollY;
-
-            // 2. Ocultar Home
             homeView.classList.add('hidden');
-            
-            // 3. Ocultar otras galerías por seguridad
             bodasView.classList.add('hidden');
             xvsView.classList.add('hidden');
             techView.classList.add('hidden');
 
-            // 4. Mostrar la deseada y hacer scroll al top (para ver la galería desde arriba)
             if (type === 'bodas') {
                 bodasView.classList.remove('hidden');
             } else if (type === 'xvs') {
@@ -655,39 +621,29 @@
             window.scrollTo(0, 0);
         }
 
-        // Función SOLO para el botón "Volver" (restaura posición anterior)
         function showHome() {
-            // 1. Ocultar galerías
             bodasView.classList.add('hidden');
             xvsView.classList.add('hidden');
             techView.classList.add('hidden');
-
-            // 2. Mostrar Home
             homeView.classList.remove('hidden');
-            
-            // 3. Restaurar la posición del scroll original
             setTimeout(() => {
                 window.scrollTo(0, lastScrollPosition);
             }, 0);
         }
 
-        // Función NUEVA para el Menú (Navegación directa)
         function navigateTo(sectionId) {
-            // 1. Asegurar que estamos en Home (ocultar galerías)
             bodasView.classList.add('hidden');
             xvsView.classList.add('hidden');
             techView.classList.add('hidden');
             homeView.classList.remove('hidden');
 
-            // 2. Scroll a la sección
             if (sectionId === 'home') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
-                // Pequeño timeout para asegurar que el DOM se renderizó si veníamos de una galería oculta
                 setTimeout(() => {
                     const element = document.getElementById(sectionId);
                     if (element) {
-                        const headerOffset = 80; // Altura aproximada del navbar
+                        const headerOffset = 80;
                         const elementPosition = element.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
                         
@@ -700,20 +656,18 @@
             }
         }
 
-        // Mobile Menu Logic (Actualizado)
+        // Mobile Menu Logic
         const mobileMenu = document.getElementById('mobile-menu');
         let isMenuOpen = false;
 
         function toggleMenu() {
             isMenuOpen = !isMenuOpen;
             if (isMenuOpen) {
-                // Abrir: Quitamos la traslación para que entre en pantalla
                 mobileMenu.classList.remove('translate-x-full');
-                document.body.style.overflow = 'hidden'; // Evitar scroll de fondo
+                document.body.style.overflow = 'hidden';
             } else {
-                // Cerrar: Volvemos a moverlo fuera de pantalla
                 mobileMenu.classList.add('translate-x-full');
-                document.body.style.overflow = 'auto'; // Permitir scroll
+                document.body.style.overflow = 'auto';
             }
             lucide.createIcons();
         }
@@ -728,13 +682,37 @@
             const tipoEvento = document.getElementById('tipoEvento').value;
             const mensaje = document.getElementById('mensaje').value;
 
-            // Formatear mensaje para WhatsApp
             const text = `Hola RCV! 👋%0A%0AQuiero consultar por un evento:%0A%0A👤 *Nombre:* ${nombre}%0A📅 *Fecha:* ${fecha}%0A🎉 *Evento:* ${tipoEvento}%0A💬 *Mensaje:* ${mensaje}`;
-            
-            // Número de teléfono (Reemplazar con el real)
             const phone = '5491140761588'; 
             
             window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+        });
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
+            let width = 0;
+            // Simulamos carga un poco más rápido para UX
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    // Fade out
+                    preloader.classList.add('opacity-0', 'pointer-events-none');
+                    // Restaurar scroll
+                    document.body.style.overflow = 'auto';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                } else {
+                    width += Math.random() * 15; // Random chunk
+                    if (width > 100) width = 100;
+                    progressBar.style.width = width + '%';
+                    progressText.innerText = 'CARGANDO... ' + Math.floor(width) + '%';
+                }
+            }, 150);
         });
 
         // Intersection Observer
